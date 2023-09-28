@@ -9,8 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.2.6",
+    "antd": "^5.9.3",
+    "install": "^0.13.0",
+    "next": "latest",
+    "npm": "^10.1.0",
     "react": "latest",
     "react-dom": "latest",
-    "next": "latest"
+    "react-pdf": "^7.4.0"
   }
 }

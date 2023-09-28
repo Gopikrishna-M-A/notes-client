@@ -1,0 +1,176 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.navbar-layout {
+    flex: 0;
+    background-color: #1890ff;
+    color: white;
+    padding: 10px;
+}
+
+.content-layout {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.footer-layout {
+    flex: 0;
+    background-color: #001529;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+
+
+
+
+a {
+    text-decoration: none;
+    color: #000 ;
+}
+
+.ant-typography {
+    margin: 0 !important;
+}
+
+
+
+
+
+
+/* COMMON STYLES START */
+
+.page {
+    padding: 10px 40px;
+}
+
+.section {
+    width: 100%;
+    margin: 10px 0;
+}
+
+
+.Row {
+    display: flex;
+    gap: 10px;
+}
+
+.Row.gap-5 {
+    gap: 5px;
+}
+
+.Row.gap-20 {
+    gap: 20px;
+}
+
+.Row.Horizontal {
+    flex-direction: row;
+}
+
+.Row.Vertical {
+    flex-direction: column;
+}
+
+.Row.JC-SB {
+    justify-content: space-between;
+}
+
+.Row.JC-C {
+    justify-content: center;
+}
+
+.Row.AI-C {
+    align-items: center;
+}
+
+.Row.AI-FS {
+    align-items: flex-start;
+}
+
+.W-100 {
+    width: 100%;
+}
+.CP{
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+.header {
+    background-color: white;
+}
+.ant-card-body{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.ant-card-grid.grid{
+    margin: 0;
+    width: 50px;
+    border-radius: 6px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sem-cards-wrapper{
+    max-width: 600px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.subject-cards-wrapper{
+    max-width: 600px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+.subject-cards-wrapper .ant-card-body{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 10px;
+}
+.ant-card-grid.sub-grid{
+    margin: 0;
+    width: 100%;
+    border-radius: 6px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.pdf-view{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
