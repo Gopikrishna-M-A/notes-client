@@ -2,7 +2,7 @@ import React, { use, useEffect, useState } from "react";
 import { Button, Select, Form, Input, Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 
-import baseURL from "@/components/BaseURL";
+import baseURL from '../../components/baseURL.js'
 
 
 const normFile = (e) => {

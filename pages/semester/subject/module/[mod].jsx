@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PdfViewer from "../../../../components/PdfViewer";
 import { Layout, Card, Typography, Button } from "antd";
 import { useRouter } from "next/router";
-import baseURL from "@/components/BaseURL";
+import baseURL from "../../../../components/baseURL.js";
 
 const { Header, Content, Footer } = Layout;
 

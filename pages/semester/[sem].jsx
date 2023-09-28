@@ -7,7 +7,7 @@ import {
   SearchOutlined,
   GithubOutlined,
 } from "@ant-design/icons";
-import baseURL from "@/components/BaseURL";
+import baseURL from '../../components/baseURL.js'
 
 const { Header, Content, Footer } = Layout;
 const { Title, Paragraph } = Typography;
