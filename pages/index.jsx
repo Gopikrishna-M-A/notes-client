@@ -30,29 +30,28 @@ function LandingPage() {
 
 
   return (
-    <Layout style={{ padding: "10px 100px" }}>
-      <Content style={{ padding: "50px" }}>
+    <Layout className="page">
+      <Content >
         <div style={{ textAlign: "center" }}>
           <Title>Welcome to College Notes</Title>
           <Paragraph>
             Find and share notes for different subjects and semesters.
           </Paragraph>
-          <Button
-            type="primary"
-            icon={<SearchOutlined />}
-            size="large"
-            style={{ marginRight: "20px" }}
+          <div className="Row MT-10 wrap">
+          <Link
+          href={'/admin'}
           >
-            Search Notes
-          </Button>
           <Button
             type="default"
             icon={<FileTextOutlined />}
             size="large"
-            href="#"
           >
             Upload Notes
           </Button>
+          </Link>
+          
+          </div>
+          
         </div>
       </Content>
 

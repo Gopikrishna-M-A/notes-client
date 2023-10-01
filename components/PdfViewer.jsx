@@ -19,6 +19,14 @@ export default function PDFViewer({ pdf, mod }) {
   const [numPages, setNumPages] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [phone, setPhone] = useState(false);
+
+  useEffect(() => {
+    const windowWidth = window.innerWidth;
+    if (windowWidth < 600) {
+      setPhone(true);
+    }
+  }, []);
 
   function onDocumentLoadSuccess({ numPages: nextNumPages }) {
     setNumPages(nextNumPages);
@@ -45,7 +53,7 @@ export default function PDFViewer({ pdf, mod }) {
 
 
   return (
-    <>
+    <div className="page">
       <Title level={3}>Module {mod}</Title>
 
         <div>
@@ -57,7 +65,7 @@ export default function PDFViewer({ pdf, mod }) {
         </div>
       <Content >
 
-        <div>
+        <div className="MT-10">
           <Document
             file={pdf}
             onLoadSuccess={onDocumentLoadSuccess}
@@ -71,11 +79,11 @@ export default function PDFViewer({ pdf, mod }) {
               renderTextLayer={false}
               onLoadSuccess={onPageLoadSuccess}
               onRenderError={() => setLoading(false)}
-              width={600}
+              {...phone ? { width: 300 } : { width: 600 }}
             />
           </Document>
         </div>
       </Content>
-    </>
+    </div>
   );
 }

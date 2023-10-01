@@ -29,10 +29,10 @@ const index = () => {
   }, []);
 
   return (
-    <Content className="pdf-view" style={{ padding: "10px 100px" }}>
+    <Content className="pdf-view page">
       <PdfViewer
         mod={module.name}
-        pdf={`http://localhost:4000/module/getpdf/${module.pdfPath}`}
+        pdf={`${baseURL}/module/getpdf/${module.pdfPath}`}
       ></PdfViewer>
     </Content>
   );

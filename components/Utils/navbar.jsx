@@ -10,10 +10,10 @@ const { Title } = Typography;
 
 const Navbar = () => {
   return (
-    <Header className="header">
+    <Header className="header Row JC-SB">
       <Space className="Row JC-SB">
           <Title level={3}>
-            <Link href="/" >College Notes</Link>
+            <Link href="/" className="logo" style={{ color:"#202020" }}>College Notes</Link>
           </Title>
       </Space>
     </Header>

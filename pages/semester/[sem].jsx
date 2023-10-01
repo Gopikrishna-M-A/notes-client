@@ -2,11 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useRouter } from "next/router";
 import { Layout, Card, Typography, Button } from "antd";
 import Link from "next/link";
-import {
-  FileTextOutlined,
-  SearchOutlined,
-  GithubOutlined,
-} from "@ant-design/icons";
+import { DeleteOutlined } from "@ant-design/icons";
 import baseURL from '../../components/baseURL.js'
 
 const { Header, Content, Footer } = Layout;
@@ -27,13 +23,26 @@ const index = () => {
       });
     }
     fetchSubjects()
-  }, []);
+  }, [subjects]);
+
+
+  const deleteSubject = async (id) => {
+    try{
+      const res = await fetch(`${baseURL}/subject/${id}`,{
+        method: "DELETE"
+      }).then((res) => res.json()).then((data) => {
+        console.log(data)
+      });
+    }catch(error){
+      console.error("An error occurred:", error);
+    }
+  }
 
   return (
-    <Content className="subject-cards-wrapper" style={{ padding: "10px 100px" }}>
+    <Content className="subject-cards-wrapper page" >
     <Card title="Subjects" >
       {subjects.map((subject) => (
-        <Link key={subject._id} href={`subject/${subject._id}`} className="sub-grid-style"><Card.Grid className="CP sub-grid">{subject.name}</Card.Grid></Link>
+        <div key={subject._id} className='Row'><Link  href={`subject/${subject._id}`} className="sub-grid-style W-100"><Card.Grid className="CP sub-grid ">{subject.name}</Card.Grid></Link> <DeleteOutlined className='deletebtn' onClick={()=> deleteSubject(subject._id)}/></div>
       ))}
     </Card>
   </Content>

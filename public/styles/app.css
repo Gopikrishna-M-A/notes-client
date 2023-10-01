@@ -107,6 +107,9 @@ a {
 .CP{
     cursor: pointer;
 }
+.MT-10{
+    margin-top: 10px;
+}
 
 
 
@@ -173,4 +176,22 @@ a {
     align-items: center;
     flex-direction: column;
     gap: 10px;
+}
+
+.wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+
+
+
+.deletebtn:hover{
+    color: red;
+}
+
+.logo:hover{
+    color: #000 !important;
 }

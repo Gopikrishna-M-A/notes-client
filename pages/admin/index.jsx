@@ -1,9 +1,8 @@
-import React, { use, useEffect, useState } from "react";
-import { Button, Select, Form, Input, Upload } from "antd";
+import React, { useEffect, useState } from "react";
+import { Button, Select, Form, Input, Upload, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 
-import baseURL from '../../components/baseURL.js'
-
+import baseURL from "../../components/baseURL.js";
 
 const normFile = (e) => {
   if (Array.isArray(e)) {
@@ -12,63 +11,15 @@ const normFile = (e) => {
   return e?.fileList;
 };
 
-const onFinish = (values) => {
-  const formData = new FormData();
-  // console.log("Success:", values);
-
-  formData.append("pdf", values.pdf[0].originFileObj);
-  formData.append("name", values.module);
-  formData.append("subject", values.subject);
-  // console.log("formData:", formData);
-
-  try {
-    const response = fetch(`${baseURL}/module`, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("data:", data);
-      });
-  } catch (err) {
-    console.log("err");
-  }
-};
-
-const onFinishSubject = (values) => {
-  try {
-    const response = fetch(`${baseURL}/subject`, {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(values),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("data:", data);  
-      });
-  } catch (err) {
-    console.log("err");
-  }
-};
-
-const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
-
-
-
-
 const index = () => {
   const [semester, setSemester] = useState([]);
   const [semesterId, setSemesterId] = useState();
   const [subject, setSubject] = useState([]);
+  const [form1] = Form.useForm();
+  const [form2] = Form.useForm();
 
-  const handleChange = (value) => {
-    // console.log(`selected ${value}`);
-    setSemesterId(value);
-  };
+
+
 
   useEffect(() => {
     const fetchSemester = async () => {
@@ -88,28 +39,87 @@ const index = () => {
     fetchSemester();
   }, []);
 
-
   useEffect(() => {
-
-      const fetchSubject = async () => {
-        try {
-          const response = fetch(`${baseURL}/subject`, {
-            method: "GET",
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              const sub = data.filter((subject) => subject.semester === semesterId);
-              setSubject(sub);
-            });
-        } catch (error) {
-          console.error("An error occurred:", error);
-        }
+    const fetchSubject = async () => {
+      try {
+        const response = fetch(`${baseURL}/subject`, {
+          method: "GET",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            const sub = data.filter(
+              (subject) => subject.semester === semesterId
+            );
+            setSubject(sub);
+          });
+      } catch (error) {
+        console.error("An error occurred:", error);
       }
+    };
 
-      fetchSubject();
-  }, [semesterId])
+    fetchSubject();
+  }, [semesterId]);
 
+  const Success = (msg) => {
+    message.success(msg);
+  };
+  const error = (msg) => {
+    message.error(msg);
+  };
 
+  const onFinish = (values) => {
+    const formData = new FormData();
+    // console.log("Success:", values);
+
+    formData.append("pdf", values.pdf[0].originFileObj);
+    formData.append("name", values.module);
+    formData.append("subject", values.subject);
+    // console.log("formData:", formData);
+
+    try {
+      const response = fetch(`${baseURL}/module`, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error) error(data.error);
+          else Success(data.success);
+          form2.resetFields();
+        });
+    } catch (err) {
+      error("An error occurred");
+    }
+  };
+
+  const onFinishSubject = (values) => {
+    try {
+      const response = fetch(`${baseURL}/subject`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error) error(data.error);
+          else Success(data.success);
+          form1.resetFields();
+        });
+    } catch (err) {
+      error("An error occurred");
+    }
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+
+  const handleChange = (value) => {
+    // console.log(`selected ${value}`);
+    setSemesterId(value);
+  };
 
 
   const options = semester.map((item) => ({
@@ -123,8 +133,9 @@ const index = () => {
   }));
 
   return (
-    <div style={{ padding: "10px 100px" }}>
+    <div className="page">
       <Form
+        form={form1}
         name="AddSubject"
         style={{ maxWidth: 400 }}
         onFinish={onFinishSubject}
@@ -166,6 +177,7 @@ const index = () => {
       {/* ------------------------------------------------------- */}
 
       <Form
+        form={form2}
         name="basic"
         style={{ maxWidth: 400 }}
         onFinish={onFinish}
@@ -180,17 +192,13 @@ const index = () => {
         </Form.Item>
 
         <Form.Item name="subject">
-          <Select
-            placeholder="Subject"
-            options={optionsSubject}
-          />
+          <Select placeholder="Subject" options={optionsSubject} />
         </Form.Item>
 
         <Form.Item name="module">
           <Select
             placeholder="Module"
-            options={
-              [
+            options={[
               {
                 value: "1",
                 label: "Module 1",
@@ -223,8 +231,7 @@ const index = () => {
                 value: "8",
                 label: "Module 8",
               },
-            ]
-            }
+            ]}
           />
         </Form.Item>
 
