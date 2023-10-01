@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Card, Typography, Button } from "antd";
+import { Layout, Card, Typography, Button, Spin } from "antd";
 import Link from "next/link";
 import {
   FileTextOutlined,
-  SearchOutlined,
-  GithubOutlined,
 } from "@ant-design/icons";
 import baseURL from '../components/baseURL.js'
 
@@ -16,6 +14,7 @@ const { Title, Paragraph } = Typography;
 function LandingPage() {
 
   const [semester, setSemester] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect (() => {
     const fetchSemester = async () => {
@@ -23,6 +22,7 @@ function LandingPage() {
         method: "GET"
       }).then((res) => res.json()).then((data) => {
         setSemester(data)
+        setLoading(false)
       });
     }
     fetchSemester()
@@ -30,9 +30,8 @@ function LandingPage() {
 
 
   return (
-    <Layout className="page">
-      <Content >
-        <div style={{ textAlign: "center" }}>
+    <Layout className="page home-page"  >
+        <div style={{ textAlign: "center",marginBottom:"30px",padding:"30px" }}>
           <Title>Welcome to College Notes</Title>
           <Paragraph>
             Find and share notes for different subjects and semesters.
@@ -53,8 +52,8 @@ function LandingPage() {
           </div>
           
         </div>
-      </Content>
 
+      <Spin spinning={loading} > 
       <Content >
         <Card title="Semester" className="sem-cards-wrapper">
           {semester.map((sem) => (
@@ -64,6 +63,7 @@ function LandingPage() {
           ))}          
         </Card>
       </Content>
+      </Spin>
     </Layout>
   );
 }

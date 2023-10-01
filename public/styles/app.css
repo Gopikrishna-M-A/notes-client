@@ -195,3 +195,20 @@ a {
 .logo:hover{
     color: #000 !important;
 }
+.home-page{
+    padding-top: 30px !important;
+}
+
+
+
+@media (width < 500px ){
+    .page {
+        padding: 10px 10px;
+    }
+    .ant-card-grid.grid {
+        width: 64px;
+    }
+    .header{
+        padding: 10px;
+    }
+}
